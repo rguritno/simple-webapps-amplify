@@ -1,16 +1,17 @@
 # AWS Configuration
-aws_region = "us-east-1"
+aws_region  = "us-east-1"
+aws_profile = "kompit"
 
 # Naming
-namespace    = "mycompany"  # Change to your company/org name
-environment  = "prod"
+namespace    = "dso-poc-amplify" # Change to your company/org name
+environment  = "poc"
 stage        = "production"
-app_name     = "webapp"     # Change to your app name
-project_name = "my-project"
+app_name     = "simple-webapps-amplify" # Change to your app name
+project_name = "dso-poc-amplify"
 
 # GitHub Repository
-repository_url     = "https://github.com/YOUR_USERNAME/YOUR_REPO"  # CHANGE THIS
-main_branch_name   = "main"
+repository_url   = "https://github.com/rguritno/simple-webapps-amplify" # CHANGE THIS
+main_branch_name = "main"
 
 # GitHub Token Secret (must exist in AWS Secrets Manager)
 github_token_secret_name = "amplify/github-token"

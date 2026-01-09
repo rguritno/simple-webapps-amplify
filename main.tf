@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 1.5"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -10,8 +10,9 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
-  
+  region  = var.aws_region
+  profile = var.aws_profile
+
   default_tags {
     tags = {
       ManagedBy   = "Terraform"
@@ -34,49 +35,49 @@ locals {
 module "amplify" {
   source  = "cloudposse/amplify-app/aws"
   version = "1.2.0"
-  
+
   # Naming
   namespace   = var.namespace
   environment = var.environment
   stage       = var.stage
   name        = var.app_name
-  
+
   # GitHub Repository Configuration
   repository   = var.repository_url
   access_token = local.github_token
   oauth_token  = local.github_token
-  
+
   # Build Configuration
   build_spec               = file("${path.module}/amplify.yml")
   enable_branch_auto_build = var.enable_auto_build
-  
+
   # Platform (WEB for static, WEB_COMPUTE for SSR)
   platform = var.platform
-  
+
   # Environment Variables
   environment_variables = var.environment_variables
-  
+
   # Branch Configuration
   environments = {
     main = {
-      branch_name                = var.main_branch_name
-      framework                  = var.framework
-      stage                      = "PRODUCTION"
-      enable_auto_build          = var.enable_auto_build
+      branch_name                 = var.main_branch_name
+      framework                   = var.framework
+      stage                       = "PRODUCTION"
+      enable_auto_build           = var.enable_auto_build
       enable_pull_request_preview = var.enable_pr_preview
-      environment_variables      = {}
+      environment_variables       = {}
     }
   }
-  
+
   # Custom Domain (optional)
-  domains = var.custom_domains
-  
+  #domains = var.custom_domains
+
   # Custom Rules for SPA routing
   custom_rules = var.custom_rules
-  
+
   # IAM Role
   iam_service_role_enabled = true
-  
+
   # Additional Tags
   tags = var.additional_tags
 }
@@ -84,7 +85,7 @@ module "amplify" {
 # Outputs
 output "app_id" {
   description = "Amplify App ID"
-  value       = module.amplify.app_id
+  value       = module.amplify.id
 }
 
 output "app_arn" {

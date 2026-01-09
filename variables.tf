@@ -5,6 +5,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "aws_profile" {
+  description = "AWS profile to use for authentication"
+  type        = string
+  default     = "kompit"
+}
+
 # Naming Convention
 variable "namespace" {
   description = "Namespace (e.g., company name or organization)"
@@ -70,7 +76,7 @@ variable "platform" {
   description = "Platform type: WEB (static) or WEB_COMPUTE (SSR)"
   type        = string
   default     = "WEB"
-  
+
   validation {
     condition     = contains(["WEB", "WEB_COMPUTE"], var.platform)
     error_message = "Platform must be either WEB or WEB_COMPUTE"
@@ -94,9 +100,9 @@ variable "environment_variables" {
 variable "custom_domains" {
   description = "Custom domain configurations"
   type = list(object({
-    domain_name           = string
+    domain_name            = string
     enable_auto_sub_domain = bool
-    wait_for_verification = bool
+    wait_for_verification  = bool
     sub_domain = list(object({
       branch_name = string
       prefix      = string
