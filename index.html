@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Amplify App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .info-box.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Hello Amplify!</h1>
+        <p class="subtitle">Deployed with Terraform + CloudPosse Module</p>
+        
+        <div class="card">
+            <h2 style="margin-bottom: 2rem;">✅ Successfully Deployed</h2>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Static HTML with global CDN</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">☁️</div>
+                    <h3>AWS Amplify</h3>
+                    <p>Serverless hosting platform</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Infrastructure as Code</h3>
+                    <p>Managed with Terraform</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📦</div>
+                    <h3>CloudPosse</h3>
+                    <p>Battle-tested module</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="showInfo()">Show Deployment Info</button>
+                <button class="secondary" onclick="testApi()">Test API Call</button>
+            </div>
+            
+            <div id="info" class="info-box"></div>
+        </div>
+    </div>
+    
+    <script>
+        function showInfo() {
+            const info = document.getElementById('info');
+            const now = new Date();
+            
+            info.innerHTML = `
+                <strong>📊 Deployment Information</strong><br><br>
+                <strong>Time:</strong> ${now.toLocaleString()}<br>
+                <strong>Timezone:</strong> ${Intl.DateTimeFormat().resolvedOptions().timeZone}<br>
+                <strong>Browser:</strong> ${navigator.userAgent.split(' ').slice(-2).join(' ')}<br>
+                <strong>Platform:</strong> ${navigator.platform}<br>
+                <strong>Language:</strong> ${navigator.language}<br>
+                <strong>Screen:</strong> ${window.screen.width}x${window.screen.height}
+            `;
+            
+            info.classList.add('show');
+        }
+        
+        function testApi() {
+            const info = document.getElementById('info');
+            
+            info.innerHTML = `
+                <strong>🌐 Testing API...</strong><br><br>
+                Since this is a static site, we'll simulate an API call.<br>
+                For real APIs, use Next.js or add API Gateway + Lambda.<br><br>
+                <strong>Simulated Response:</strong><br>
+                <code style="background: rgba(0,0,0,0.2); padding: 1rem; display: block; margin-top: 1rem; border-radius: 5px; text-align: left;">
+                {<br>
+                &nbsp;&nbsp;"status": "success",<br>
+                &nbsp;&nbsp;"message": "API is working!",<br>
+                &nbsp;&nbsp;"timestamp": "${new Date().toISOString()}"<br>
+                }
+                </code>
+            `;
+            
+            info.classList.add('show');
+        }
+        
+        // Add some interactivity
+        console.log('%c🚀 Welcome to Amplify!', 'font-size: 20px; color: #667eea; font-weight: bold;');
+        console.log('This app is deployed with Terraform using CloudPosse module');
+        console.log('Check out the source: https://github.com/cloudposse/terraform-aws-amplify-app');
+    </script>
+</body>
+</html>
