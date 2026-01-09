@@ -9,7 +9,7 @@
 set -euo pipefail
 
 # Configuration
-AWS_PROFILE="kompit"
+AWS_PROFILE="<you-aws-profile>"
 REGION="${AWS_REGION:-ap-southeast-1}"
 OUTPUT_DIR="./amplify-discovery-$(date +%Y%m%d-%H%M%S)"
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
