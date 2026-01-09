@@ -30,7 +30,7 @@ git --version
 ## 📁 Project Structure
 
 ```
-my-amplify-app/
+simple-webapps-amplify/
 ├── index.html           # Your web application
 ├── main.tf              # Terraform configuration
 ├── variables.tf         # Variable definitions
@@ -44,8 +44,8 @@ my-amplify-app/
 ### Step 1: Create Project Directory
 
 ```bash
-mkdir my-amplify-app
-cd my-amplify-app
+mkdir simple-webapps-amplify
+cd simple-webapps-amplify
 ```
 
 ### Step 2: Create Files
