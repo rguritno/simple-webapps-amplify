@@ -1,0 +1,34 @@
+version: 1
+frontend:
+  phases:
+    # preBuild phase - runs before build
+    # Uncomment if you need to install dependencies
+    # preBuild:
+    #   commands:
+    #     - npm ci
+    #     # or: yarn install --frozen-lockfile
+    
+    # build phase - runs the build
+    build:
+      commands:
+        - echo "Building static site..."
+        # For static HTML, no build needed
+        # Uncomment below if using a framework:
+        # - npm run build          # for React, Vue, Angular
+        # - next build && next export  # for Next.js static
+    
+  # artifacts - what to deploy
+  artifacts:
+    baseDirectory: /
+    # For static HTML, use /
+    # For React/Vue: build or dist
+    # For Next.js: .next or out
+    files:
+      - '**/*'
+  
+  # cache - speeds up builds
+  cache:
+    paths: []
+    # Uncomment if using npm/yarn:
+    # paths:
+    #   - node_modules/**/*
